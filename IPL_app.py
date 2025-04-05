@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import pickle
 import joblib
+import os
 
 teams = ['Gujarat Titans', 'Rajasthan Royals', 'Punjab Kings',
        'Mumbai Indians', 'Royal Challengers Bangalore',
@@ -79,3 +80,10 @@ if st.button('Predict'):
         st.header(batting_team + 'will win.')
     else:
         st.header(bowling_team + ' will win.')
+
+# Having some problem after deploying. Render deployed and provided the link  as well
+# but due to some problem of port, it was not working. So, entered below code from ChatGPT>
+os.environ['STREAMLIT_SERVER_HEADLESS'] = 'true'
+os.environ['STREAMLIT_SERVER_PORT'] = '8501'
+os.environ['STREAMLIT_SERVER_ADDRESS'] = '0.0.0.0'
+
