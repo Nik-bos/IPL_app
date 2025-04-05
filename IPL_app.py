@@ -1,7 +1,6 @@
 import pandas as pd
 import streamlit as st
 import pickle
-import os
 
 teams = ['Gujarat Titans', 'Rajasthan Royals', 'Punjab Kings',
        'Mumbai Indians', 'Royal Challengers Bangalore',
@@ -16,7 +15,7 @@ cities = ['Ahmedabad', 'Kolkata', 'Mumbai', 'Navi Mumbai', 'Pune', 'Dubai',
        'Bloemfontein', 'Port Elizabeth', 'Kimberley', 'East London',
        'Cape Town', 'Guwahati']
 
-model_path = os.path.join(os.path.dirname(__file__), 'IPL_prediction_using_StackingClf.pkl')
+model_path = 'IPL_prediction_using_StackingClf.pkl'
 pipe = pickle.load(open(model_path, 'rb'))
 
 # Starting to build app
