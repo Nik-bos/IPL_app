@@ -3,6 +3,29 @@ import streamlit as st
 import pickle
 import joblib
 
+'''
+We don't need time to include it in req.txt bcz time is a python
+built-in package not a third party module/package.
+time, os, sys, math etc are python's built-in modules/packages
+'''
+# Create a placeholder
+placeholder = st.empty()
+
+# Show waking-up message in the placeholder
+with placeholder.container():
+    st.spinner("Waking up the app...")  # Spinner context must be inside the block too
+    st.title("Hey there! 👋")
+    st.subheader("Wish you a very happy and a beautiful day!")
+    st.write("The app is waking up — please hang tight for a few seconds...")
+    time.sleep(5)  # Simulate loading time
+
+# Now clear the placeholder (removes the loading message)
+placeholder.empty()
+
+# Above code lines will print welcome msg till the app loads.
+# If You dont know this codes, it's ok, not needed compulsorily.
+
+
 teams = ['Gujarat Titans', 'Rajasthan Royals', 'Punjab Kings',
        'Mumbai Indians', 'Royal Challengers Bangalore',
        'Sunrisers Hyderabad', 'Delhi Capitals', 'Chennai Super Kings',
