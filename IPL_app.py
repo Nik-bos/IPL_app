@@ -76,7 +76,7 @@ if st.button('Predict'):
 
     pred = pipe.predict(df)
     if pred == 1:
-        st.header(batting_team + 'will win.')
+        st.header(batting_team + ' will win.')
     else:
         st.header(bowling_team + ' will win.')
 
