@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import pickle
 import joblib
+import time
 
 '''
 We don't need time to include it in req.txt bcz time is a python
