@@ -72,7 +72,7 @@ if st.button('Predict'):
 
     df = pd.DataFrame(data)
 
-    st.table(df)    # Checking if dataframe is created properly
+    # st.table(df)    # Checking if dataframe is created properly
 
     pred = pipe.predict(df)
     if pred == 1:
@@ -80,9 +80,4 @@ if st.button('Predict'):
     else:
         st.header(bowling_team + ' will win.')
 
-# Having some problem after deploying. Render deployed and provided the link  as well
-# but due to some problem of port, it was not working. So, entered below code from ChatGPT>
-# os.environ['STREAMLIT_SERVER_HEADLESS'] = 'true'
-# os.environ['STREAMLIT_SERVER_PORT'] = '8501'
-# os.environ['STREAMLIT_SERVER_ADDRESS'] = '0.0.0.0'
 
