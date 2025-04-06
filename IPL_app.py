@@ -1,7 +1,8 @@
 import pandas as pd
 import streamlit as st
-import pickle
 import joblib
+import pickle
+
 
 teams = ['Gujarat Titans', 'Rajasthan Royals', 'Punjab Kings',
        'Mumbai Indians', 'Royal Challengers Bangalore',
@@ -11,14 +12,13 @@ teams = ['Gujarat Titans', 'Rajasthan Royals', 'Punjab Kings',
 cities = ['Ahmedabad', 'Kolkata', 'Mumbai', 'Navi Mumbai', 'Pune', 'Dubai',
        'Sharjah', 'Abu Dhabi', 'Delhi', 'Chennai', 'Hyderabad',
        'Visakhapatnam', 'Chandigarh', 'Bengaluru', 'Jaipur', 'Indore',
-       'Bangalore', 'Kanpur', 'Rajkot', 'Raipur', 'Ranchi', 'Cuttack',
+          'Kanpur', 'Rajkot', 'Raipur', 'Ranchi', 'Cuttack',
        'Dharamsala', 'Nagpur', 'Johannesburg', 'Centurion', 'Durban',
        'Bloemfontein', 'Port Elizabeth', 'Kimberley', 'East London',
        'Cape Town', 'Guwahati']
 
-# model_path = 'IPL_prediction_using_StackingClf.pkl'
-# pipe = pickle.load(open(model_path, 'rb'))
-pipe = joblib.load(r'ipl_predictor.joblib')
+# pipe = pickle.load(open(r'ipl_predictor.pkl', 'rb'))
+pipe = joblib.load(r'ipl_predictor2.joblib')
 
 # Starting to build app
 
@@ -50,34 +50,41 @@ with col_7:
 
 
 if st.button('Predict'):
-    balls_played = 120 - balls_left
-    runs_made = total_run_x - runs_left
-    # Avoid division by zero errors
-    crr = runs_made / (balls_played / 6) if balls_played > 0 else 0
-    rrr = (runs_left * 6) / balls_left if balls_left > 0 else float('inf')  # Set rrr to 'inf' if balls_left is 0
 
-    # Creating dataframe
+    if balls_left == 0 and runs_left > 0:
+        st.header(bowling_team + ' won the match.')
+    elif balls_left > 0 and runs_left == 0:
+        st.header(batting_team + ' won the match.')
+    elif balls_left == 0 and runs_left == 0:
+        st.header(batting_team + ' won the match.')
 
-    data = {
-    'batting_team': [batting_team],
-    'bowling_team': [bowling_team],
-    'city': [city],
-    'runs_left': [runs_left],
-    'balls_left': [balls_left],
-    'wickets_remaining': [wickets_remaining],
-    'total_run_x': [total_run_x],
-    'crr': [crr],
-    'rrr': [rrr]
-}
+    else:
+        balls_played = 120 - balls_left
+        runs_made = total_run_x - runs_left
+        # Avoid division by zero errors
+        crr = runs_made / (balls_played / 6) if balls_played > 0 else 0
+        rrr = runs_left / (balls_left / 6) if balls_left > 0 else float('inf')  # Set rrr to 'inf' if balls_left is 0
 
-    df = pd.DataFrame(data)
+        # Creating dataframe
+
+        data = {
+        'batting_team': [batting_team],
+        'bowling_team': [bowling_team],
+        'city': [city],
+        'runs_left': [runs_left],
+        'balls_left': [balls_left],
+        'wickets_remaining': [wickets_remaining],
+        'total_run_x': [total_run_x],
+        'crr': [crr],
+        'rrr': [rrr]
+    }
+
+        df = pd.DataFrame(data)
 
     # st.table(df)    # Checking if dataframe is created properly
 
-    pred = pipe.predict(df)
-    if pred == 1:
-        st.header(batting_team + ' will win.')
-    else:
-        st.header(bowling_team + ' will win.')
-
-
+        pred = pipe.predict(df)
+        if pred == 1:
+            st.header(batting_team + ' will win.')
+        else:
+            st.header(bowling_team + ' will win.')
