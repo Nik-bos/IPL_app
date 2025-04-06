@@ -2,8 +2,6 @@ import pandas as pd
 import streamlit as st
 import pickle
 import joblib
-import time
-
 
 teams = ['Gujarat Titans', 'Rajasthan Royals', 'Punjab Kings',
        'Mumbai Indians', 'Royal Challengers Bangalore',
