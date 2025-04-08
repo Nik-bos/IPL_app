@@ -18,7 +18,7 @@ cities = ['Ahmedabad', 'Kolkata', 'Mumbai', 'Navi Mumbai', 'Pune', 'Dubai',
        'Cape Town', 'Guwahati']
 
 # pipe = pickle.load(open(r'ipl_predictor.pkl', 'rb'))
-pipe = joblib.load(r'ipl_predictor2.joblib')
+pipe = joblib.load(r'ipl_predictor.joblib')
 
 # Starting to build app
 
